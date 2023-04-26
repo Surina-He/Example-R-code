@@ -1,0 +1,85 @@
+---
+title: "Example"
+author: "Surina"
+date: "2023-04-26"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+The first step is to install required packages
+```{r}
+# dplyr and tidyver packages are for pre-processing / cleaning data
+# skimr is for skim the dataset
+# DataExplorer is for explore data and doing descriptive analysis
+# psych is the most commonly used package for psychology
+# ShinyItemAnalysis is also for doing item analysis
+# ggplot2 is for drawing plots
+
+install.packages(c("dplyr", "tidyverse","skimr", "DataExplorer", 
+                   "psych", "ShinyItemAnalysis", "ggplot2"))
+```
+
+The second step is to load these packages
+```{r}
+library("dplyr")
+library("tidyverse")
+library("skimr")
+library("DataExplorer")
+library("psych")
+library("ShinyItemAnalysis")
+library("ggplot2")
+```
+
+We can import our data now! 
+```{r}
+# read excel data, using readxl package
+install.packages("readxl") 
+library("readxl")
+Example<-read_excel("Example.xlsx")
+
+# read csv data, using 
+install.packages("readr") 
+library("readr")
+Example<-read.csv("Example.csv")
+write_sav(Example, "Example.sav")
+
+# read sav (i.e., spss) data
+install.packages("haven") 
+library("haven")
+Example<-read_sav("Example.sav")
+```
+
+Check the descriptive statistics of the dataset using skim function in skimr package
+
+It reports number of missing data in each variable (n_missing), complete rate, mean,
+standard deviation (sd), the minimum value (P0), number in the first quartile (P20),
+median (P50), number in the third quartile (P7), the maximum value (P100), and 
+histogram for the data frequency distribution (hist)
+```{r}
+skimr::skim(Example)
+```
+
+Check the descriptive statistics of the dataset using describe function in psych package
+
+It reports nnumber of cases in each variable (n), mean, standard deviation (sd), 
+median, complete rate, mean,trimmed mean, median absolute deviation (mad), 
+the minimum value (min), the maximum value (P100), range, skewness, kurtosis,  
+and standard error (se)
+
+In general, a skewness value between -1 and 1 indicates a relatively symmetrical distribution, 
+while values outside of this range indicate a skewed distribution. 
+For kurtosis, a value of 0 indicates a normal distribution, negative values indicate a flatter distribution, and positive values indicate a more peaked distribution. But kurtosis values 
+between -2 and 2 are often considered acceptable for most statistical analyses.
+```{r}
+psych::describe(Example)
+```
+
+
+
+
+
+
+
+
+
+
